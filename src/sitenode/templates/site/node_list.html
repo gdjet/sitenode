@@ -1,0 +1,14 @@
+{% extends "site/base.html" %}
+
+{% block content %}
+<h1>{{ node.title }}</h1>
+<h2>{{ node.subtitle }}</h2>
+
+{{ node.as_leaf.as_html }}
+
+{% if object_list %}
+    {% for object in object_list %}
+        {% include object.object_template %}
+    {% endfor %}
+{% endif %}
+{% endblock content %}

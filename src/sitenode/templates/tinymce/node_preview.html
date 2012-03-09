@@ -1,0 +1,8 @@
+{% extends "site/base.html" %}
+{% load tinymce_tags %}
+{% block extra_head %}
+{% tinymce_preview "preview-content" %}
+{% endblock %}
+{% block content %}
+<div id="preview-content"></div>
+{% endblock content %}

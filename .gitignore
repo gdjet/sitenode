@@ -1,0 +1,50 @@
+# GIT ignore for onstage project
+# written by g4b
+
+# standard virtualenv in-project settings
+*.pyc
+/bin
+!/bin/lessc
+/lib
+!/lib/less
+/include
+/man
+/docs/_build
+/docs/_static
+/docs/_templates
+pip-log.txt
+
+# system files
+.DS_Store
+
+# IDE files
+/.idea
+/.project
+/.settings/*
+/.pydevproject
+
+# svn
+.svn*
+.SVN*
+
+# sqlite db files
+*.db
+*.db~
+
+# temp files
+*.*~
+*.tmp
+/tmp
+
+# django
+/media/cache
+/media/uploads
+/media/upload
+/media/export-ios
+/static/*
+!/static/.dummy.txt
+/media/stash
+
+# project
+/src/*
+!/src/sitenode
