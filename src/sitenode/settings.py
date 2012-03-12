@@ -19,3 +19,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 from django.conf import settings
+
+NODE_SOURCE_TYPES = getattr(settings, 'SITENODE_SOURCE_TYPES', (
+        (0, 'Plain Text'),
+        (1, 'HTML'),
+        (2, 'MarkDown'),
+        ))

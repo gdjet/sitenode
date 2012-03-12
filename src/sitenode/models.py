@@ -33,13 +33,7 @@ try:
 except ImportError:
     pass
 
-NODE_SOURCE_TYPES = (
-        (0, 'Plain Text'),
-        (1, 'HTML'),
-        (2, 'MarkDown'),
-                     )
-
-
+from sitenode.settings import NODE_SOURCE_TYPES
 
 class Node(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
@@ -139,5 +133,3 @@ class NodeHtml(Node):
         # @todo: dynamic binding for other types (and move this to elif==1 then)
         return mark_safe(self.source)
 
-#class BlogEntry(NodeHtml):
-#    pass
