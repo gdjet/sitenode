@@ -15,3 +15,7 @@ Stage
 =====
 
 Working alpha.
+
+Add to Requirements
+===================
+-e git+git://github.com/gdjet/sitenode.git#egg=sitenode
