@@ -1,0 +1,18 @@
+# very basic list of web dev utilities for mid size projects
+Django
+django-tinymce
+-e git+git://github.com/g4borg/gdjet.git#egg=gdjet
+django-endless-pagination
+django-grappelli
+django-filebrowser>=3.4.0
+django-extensions
+sphinx
+Celery
+South
+#django-sentry
+django-celery
+django-kombu
+supervisor
+python-dateutil
+mimeparse>=0.1.3
+django-tastypie
