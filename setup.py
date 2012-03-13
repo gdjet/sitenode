@@ -8,6 +8,8 @@ setup(
     author_email='gab(at)g4b.org',
     url='',
     download_url='',
+    install_requires=['django-tinymce', 'django-endless-pagination',
+                      'django-grappelli', 'django-filebrowser>=3.4.0'],
     package_dir={'': 'src'},
     packages=find_packages(),
     include_package_data=True,
