@@ -33,7 +33,7 @@ try:
 except ImportError:
     pass
 
-from sitenode.settings import NODE_SOURCE_TYPES
+from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE
 
 class Node(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
@@ -102,7 +102,7 @@ class Node(models.Model):
             to include following template.
         """
         if not self.template:
-            return settings.NODE_DIV_TEMPLATE
+            return NODE_DIV_TEMPLATE
         return self.template
 
 class NodeHtml(Node):

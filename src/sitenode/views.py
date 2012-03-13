@@ -21,11 +21,11 @@ GNU General Public License for more details.
 from endless_pagination.views import AjaxListView
 from django.shortcuts import get_object_or_404
 from models import Node
-from sitenode import settings
+from sitenode.settings import NODE_LIST_TEMPLATE
 
 class NodesListView(AjaxListView):
     CHILDREN_SORT = '-date_created'
-    template_name = settings.NODE_LIST_TEMPLATE
+    template_name = NODE_LIST_TEMPLATE
     node_url = ''
 
     def get_queryset(self):
