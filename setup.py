@@ -2,12 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='sitenode',
-    version='0.99',
+    version='0.99.1',
     description='Basic Models for Web Development',
     author='g4b',
     author_email='gab(at)g4b.org',
     url='',
     download_url='',
+    package_dir={'': 'src'},
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
