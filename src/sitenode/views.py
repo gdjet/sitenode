@@ -21,10 +21,11 @@ GNU General Public License for more details.
 from endless_pagination.views import AjaxListView
 from django.shortcuts import get_object_or_404
 from models import Node
+from sitenode import settings
 
 class NodesListView(AjaxListView):
     CHILDREN_SORT = '-date_created'
-    template_name = 'site/node_list.html'
+    template_name = settings.NODE_LIST_TEMPLATE
     node_url = ''
 
     def get_queryset(self):
@@ -40,11 +41,7 @@ class NodesListView(AjaxListView):
 
     def get_template_names(self):
         try:
-            print "GET TEMPLATE NAMES CALLED"
-            print dir(self)
-            print self.node
             if self.node is not None and self.node.template:
-                print "Returning: %s" % self.node.template
                 self.template_name = self.node.template
                 return '%s' % self.node.template
         finally:

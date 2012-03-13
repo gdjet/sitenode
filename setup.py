@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sitenode',
-    version='0.99.4',
+    version='0.99.5',
     description='Basic Models for Web Development',
     author='g4b',
     author_email='gab(at)g4b.org',

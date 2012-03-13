@@ -25,3 +25,11 @@ NODE_SOURCE_TYPES = getattr(settings, 'SITENODE_SOURCE_TYPES', (
         (1, 'HTML'),
         (2, 'MarkDown'),
         ))
+
+NODE_LIST_TEMPLATE = getattr(settings, 'SITENODE_LIST_TEMPLATE',
+                             'site/node_list.html')
+
+NODE_DIV_TEMPLATE = getattr(settings, 'SITENODE_DIV_TEMPLATE',
+                            'site/node_div.html')
+
+

@@ -102,7 +102,7 @@ class Node(models.Model):
             to include following template.
         """
         if not self.template:
-            return 'site/node_div.html'
+            return settings.NODE_DIV_TEMPLATE
         return self.template
 
 class NodeHtml(Node):
