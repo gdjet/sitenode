@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sitenode',
-    version='0.99.3',
+    version='0.99.4',
     description='Basic Models for Web Development',
     author='g4b',
     author_email='gab(at)g4b.org',
@@ -10,8 +10,8 @@ setup(
     download_url='',
     install_requires=['django-tinymce', 'django-endless-pagination',
                       'django-grappelli', 'django-filebrowser>=3.4.0'],
-    requires=['django-tinymce', 'django-endless-pagination',
-                      'django-grappelli', 'django-filebrowser>=3.4.0'],
+    #requires=['django-tinymce', 'django-endless-pagination',
+    #                  'django-grappelli', 'django-filebrowser>=3.4.0'],
     package_dir={'': 'src'},
     packages=find_packages(),
     include_package_data=True,
