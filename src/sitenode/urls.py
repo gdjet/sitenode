@@ -31,4 +31,9 @@ urlpatterns = patterns('site.views',
                                 #template_name='site/node_list.html',
                                 ),
             name='nodes'),
+       url(r'^$', views.NodesListView.as_view(
+                                model=models.Node,
+                                node_url='/',
+            ), name='sitenode'),
        )
+
