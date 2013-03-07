@@ -26,9 +26,12 @@ from sitenode import models
 from sitenode import views
 
 urlpatterns = patterns('site.views',
-        url(r'^(?P<node_url>[a-zA-Z0-9_.\-/]+)/$', views.NodesListView.as_view(
+        url(r'^(?P<node_url>[a-zA-Z0-9_\.\-/]+)/$',
+                   views.NodesListView.as_view(
                                 model=models.Node,
-                                #template_name='site/node_list.html',
-                                ),
-            name='nodes'),
+            ), name='nodes'),
+        url(r'^$', views.NodesListView.as_view(
+                               model=models.Node,
+                               node_url='/',
+            ), name='node-root'), # root.
        )

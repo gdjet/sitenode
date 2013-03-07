@@ -27,17 +27,15 @@ from django.template.defaultfilters import slugify
 from filebrowser.fields import FileBrowseField
 from sitenode import fields
 from sitenode.jsonstore import JSONField
+from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE
 
 try:
     import markdown
 except ImportError:
     pass
 
-NODE_SOURCE_TYPES = (
-        (0, 'Plain Text'),
-        (1, 'HTML'),
-        (2, 'MarkDown'),
-                     )
+NODE_SOURCE_TYPES = NODE_SOURCE_TYPES or \
+    ((0, 'Plain Text'), (1, 'HTML'), (2, 'MarkDown'),)
 
 class Node(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
@@ -106,7 +104,7 @@ class Node(models.Model):
             to include following template.
         """
         if not self.template:
-            return 'site/node_div.html'
+            return NODE_DIV_TEMPLATE or 'site/node_div.html'
         return self.template
 
     def has_content(self):
