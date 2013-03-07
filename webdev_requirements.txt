@@ -1,7 +1,6 @@
 # very basic list of web dev utilities for mid size projects
 Django
 django-tinymce
--e git+git://github.com/g4borg/gdjet.git#egg=gdjet
 django-endless-pagination
 django-grappelli
 django-filebrowser>=3.4.0
