@@ -13,6 +13,7 @@
 /docs/_static
 /docs/_templates
 pip-log.txt
+/.settings/*
 
 # system files
 .DS_Store
@@ -46,5 +47,4 @@ pip-log.txt
 /media/stash
 
 # project
-/src/*
-!/src/sitenode
+

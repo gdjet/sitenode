@@ -20,20 +20,24 @@ GNU General Public License for more details.
 """
 from django.contrib.auth.models import User
 from django.db import models
-from gdjet.models.fields import JSONField
 from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
 from django.utils.html import escape, strip_tags, linebreaks
 from django.template.defaultfilters import slugify
 from filebrowser.fields import FileBrowseField
 from sitenode import fields
+from sitenode.jsonstore import JSONField
 
 try:
     import markdown
 except ImportError:
     pass
 
-from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE
+NODE_SOURCE_TYPES = (
+        (0, 'Plain Text'),
+        (1, 'HTML'),
+        (2, 'MarkDown'),
+                     )
 
 class Node(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
@@ -79,7 +83,7 @@ class Node(models.Model):
             full_slug = '%s/%s' % (self.parent.slug, subslug)
             if Node.objects.filter(slug__iexact=full_slug).count() and self.pk is None:
                 number = self.parent.children.count()
-                while Node.objects.exists(slug__iexact='%s%s' % (full_slug, number)):
+                while Node.objects.filter(slug__iexact='%s%s' % (full_slug, number)).exists():
                     number += 1
                 full_slug = '%s%s' % (full_slug, number)
             self.slug = full_slug
@@ -102,14 +106,17 @@ class Node(models.Model):
             to include following template.
         """
         if not self.template:
-            return NODE_DIV_TEMPLATE
+            return 'site/node_div.html'
         return self.template
+
+    def has_content(self):
+        return False
 
 class NodeHtml(Node):
     """
         A Node which supports HTML.
     """
-    source = models.TextField()
+    source = models.TextField(blank=True, default='')
     source_type = models.PositiveIntegerField(default=1, choices=NODE_SOURCE_TYPES)
 
     def as_html(self):
@@ -133,3 +140,10 @@ class NodeHtml(Node):
         # @todo: dynamic binding for other types (and move this to elif==1 then)
         return mark_safe(self.source)
 
+    def has_content(self):
+        if self.source:
+            return True
+        return False
+
+#class BlogEntry(NodeHtml):
+#    pass

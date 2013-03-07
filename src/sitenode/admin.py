@@ -19,7 +19,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 from django.contrib import admin
-from models import *
+from sitenode.models import *
 from tinymce.widgets import TinyMCE
 from django.core.urlresolvers import reverse
 
@@ -34,4 +34,4 @@ class NodeHtmlTinyMCEAdmin(admin.ModelAdmin):
         return super(NodeHtmlTinyMCEAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
 admin.site.register(Node)
-admin.site.register(NodeHtml, NodeHtmlTinyMCEAdmin)
+admin.site.register(NodeHtml)

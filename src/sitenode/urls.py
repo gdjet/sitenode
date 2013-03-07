@@ -22,8 +22,8 @@ from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.edit import FormView, CreateView
 from django.views.generic.base import TemplateView
-import models
-import views
+from sitenode import models
+from sitenode import views
 
 urlpatterns = patterns('site.views',
         url(r'^(?P<node_url>[a-zA-Z0-9_.\-/]+)/$', views.NodesListView.as_view(
@@ -31,9 +31,4 @@ urlpatterns = patterns('site.views',
                                 #template_name='site/node_list.html',
                                 ),
             name='nodes'),
-       url(r'^$', views.NodesListView.as_view(
-                                model=models.Node,
-                                node_url='/',
-            ), name='sitenode'),
        )
-
