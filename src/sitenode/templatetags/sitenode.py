@@ -1,5 +1,5 @@
 from django import template
-from sitenode.models import Node
+from ..models import Node
 
 register = template.Library()
 
