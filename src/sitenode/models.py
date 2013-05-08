@@ -97,6 +97,9 @@ class Node(models.Model):
         model = content_type.model_class()
         return model.objects.get(id=self.id)
 
+    def as_html(self):
+        return self.title
+
     def object_template(self):
         """
             called by inclusion of node children iterations.
