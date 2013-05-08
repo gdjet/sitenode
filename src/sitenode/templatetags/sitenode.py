@@ -15,10 +15,11 @@ class SiteNodeNode(template.Node):
             node = Node.objects.get(slug=self.slug)
         except:
             return ''
+        node = node.as_leaf()
         if self.as_var:
-            context[self.as_var] = node.as_leaf()
+            context[self.as_var] = node
             return ""
-        return node.as_leaf().as_html()
+        return node.as_html()
 
 
 @register.tag(name="include_node")

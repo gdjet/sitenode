@@ -98,7 +98,7 @@ class Node(models.Model):
         return model.objects.get(id=self.id)
 
     def as_html(self):
-        return '<!-- No Entry -->'
+        return mark_safe('<!-- No Entry -->')
 
     def object_template(self):
         """
