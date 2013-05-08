@@ -98,7 +98,7 @@ class Node(models.Model):
         return model.objects.get(id=self.id)
 
     def as_html(self):
-        return self.title
+        return '<!-- No Entry -->'
 
     def object_template(self):
         """
@@ -134,7 +134,7 @@ class NodeHtml(Node):
                                    #     }
                                     )
                 # @todo: WikiLinks plugin.
-                r = md.convert(self.text,)
+                r = md.convert(self.source,)
                 return mark_safe(r)
             except:
                 raise NotImplementedError, "MarkDown either not installed or implemented yet."
