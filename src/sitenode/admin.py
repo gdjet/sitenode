@@ -23,7 +23,40 @@ from sitenode.models import *
 from tinymce.widgets import TinyMCE
 from django.core.urlresolvers import reverse
 
-class NodeHtmlTinyMCEAdmin(admin.ModelAdmin):
+class NodeAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'slug', 'title', 'public', 'parent', 'template')
+    list_editable = ('title', 'slug', 'parent')
+
+    fieldsets = (
+        ('', {
+            'fields': ('title', 'subtitle', 'slug', 'image'),
+        }),
+        ('Advanced', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields' : ('template', 'icon_file', 'options',),
+        }),
+        ('Publicity', {
+            'classes': ('grp-collapse grp-open',),
+            'fields' : ('user', 'public', 'parent'),
+        }),
+    )
+
+class NodeHtmlTinyMCEAdmin(NodeAdmin):
+    list_editable = ('title',)
+    fieldsets = (
+        ('', {
+            'fields': ('title', 'subtitle', 'slug', 'image', 'source'),
+        }),
+        ('Advanced', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields' : ('template', 'icon_file', 'options', 'source_type'),
+        }),
+        ('Publicity', {
+            'classes': ('grp-collapse grp-open',),
+            'fields' : ('user', 'public', 'parent'),
+        }),
+    )
+
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'source':
             return db_field.formfield(widget=TinyMCE(
@@ -33,5 +66,5 @@ class NodeHtmlTinyMCEAdmin(admin.ModelAdmin):
             ))
         return super(NodeHtmlTinyMCEAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
-admin.site.register(Node)
-admin.site.register(NodeHtml)
+admin.site.register(Node, NodeAdmin)
+admin.site.register(NodeHtml, NodeHtmlTinyMCEAdmin)
