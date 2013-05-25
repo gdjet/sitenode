@@ -18,7 +18,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from django.conf import settings
 from django.views.generic.edit import FormView, CreateView
 from django.views.generic.base import TemplateView
