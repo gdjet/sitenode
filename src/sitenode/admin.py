@@ -41,6 +41,25 @@ class NodeAdmin(admin.ModelAdmin):
         }),
     )
 
+class NodeAliasAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'slug', 'title', 'public', 'parent', 'template')
+    list_editable = ('title', 'slug', 'parent')
+
+    fieldsets = (
+        ('', {
+            'fields': ('redirect',),
+        }),
+        ('Advanced', {
+            'classes': ('grp-collapse grp-closed',),
+            'fields' : ('title', 'subtitle', 'slug', 'image', 'template', 'icon_file', 'options',),
+        }),
+        ('Publicity', {
+            'classes': ('grp-collapse grp-open',),
+            'fields' : ('user', 'public', 'parent'),
+        }),
+    )
+
+
 class NodeHtmlTinyMCEAdmin(NodeAdmin):
     list_editable = ('title',)
     fieldsets = (
@@ -67,5 +86,5 @@ class NodeHtmlTinyMCEAdmin(NodeAdmin):
         return super(NodeHtmlTinyMCEAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
 admin.site.register(Node, NodeAdmin)
-admin.site.register(NodeAlias, NodeAdmin)
+admin.site.register(NodeAlias, NodeAliasAdmin)
 admin.site.register(NodeHtml, NodeHtmlTinyMCEAdmin)
