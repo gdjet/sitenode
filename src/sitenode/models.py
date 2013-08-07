@@ -60,9 +60,9 @@ class Node(models.Model):
 
     def __unicode__(self):
         if self.parent:
-            return u'%s > %s' % (self.parent.title, self.title)
+            return u'%s > %s (%s)' % (self.parent.title, self.title, self.slug)
         else:
-            return u'%s' % self.title
+            return u'%s (%s)' % (self.title, self.slug)
 
     def save(self, *args, **kwargs):
         if(not self.content_type):
