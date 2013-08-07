@@ -112,6 +112,15 @@ class Node(models.Model):
 
     def has_content(self):
         return False
+    
+class NodeAlias(Node):
+    redirect = models.ForeignKey(Node, related_name='redirects')
+    
+    def as_leaf(self):
+        if self.redirect:
+            return self.redirect.as_leaf()
+        else:
+            return Node.as_leaf(self)
 
 class NodeHtml(Node):
     """

@@ -20,7 +20,7 @@ GNU General Public License for more details.
 """
 from endless_pagination.views import AjaxListView
 from django.shortcuts import get_object_or_404
-from sitenode.models import Node
+from sitenode.models import Node, NodeAlias
 from sitenode.settings import NODE_LIST_TEMPLATE
 
 class NodesListView(AjaxListView):
@@ -36,6 +36,10 @@ class NodesListView(AjaxListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(NodesListView, self).get_context_data(**kwargs)
+        # internal aliasing:
+        if isinstance(self.node, NodeAlias):
+            if self.node.redirect:
+                self.node = self.node.redirect
         context['node'] = self.node
         return context
 

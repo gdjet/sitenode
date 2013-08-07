@@ -67,4 +67,5 @@ class NodeHtmlTinyMCEAdmin(NodeAdmin):
         return super(NodeHtmlTinyMCEAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
 admin.site.register(Node, NodeAdmin)
+admin.site.register(NodeAlias, NodeAdmin)
 admin.site.register(NodeHtml, NodeHtmlTinyMCEAdmin)
