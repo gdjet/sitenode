@@ -31,15 +31,16 @@ class NodesListView(AjaxListView):
     def get_queryset(self):
         node_url = self.node_url or self.kwargs.get('node_url', '')
         self.node = get_object_or_404(Node, slug=node_url)
+        try:
+            alias = NodeAlias.objects.get(pk=self.node.pk)
+            self.node = alias.redirect
+        except NodeAlias.DoesNotExist:
+            pass
         return self.node.children.filter(public=True).order_by(self.CHILDREN_SORT)
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(NodesListView, self).get_context_data(**kwargs)
-        # internal aliasing:
-        if isinstance(self.node, NodeAlias):
-            if self.node.redirect:
-                self.node = self.node.redirect
         context['node'] = self.node
         return context
 
