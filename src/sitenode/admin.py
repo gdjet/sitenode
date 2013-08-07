@@ -42,8 +42,8 @@ class NodeAdmin(admin.ModelAdmin):
     )
 
 class NodeAliasAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'slug', 'title', 'public', 'parent', 'template')
-    list_editable = ('title', 'slug', 'parent')
+    list_display = ('pk', 'slug', 'title', 'public', 'parent', 'redirect')
+    list_editable = ('title', 'slug', 'parent', 'redirect')
 
     fieldsets = (
         ('', {
