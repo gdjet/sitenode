@@ -27,11 +27,14 @@ GNU General Public License for more details.
 # modified to understand other formats
 
 from django.db import models
-from django.utils import simplejson as json, datetime_safe
+from django.utils import datetime_safe
 from django.http import HttpResponse
-from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.functional import Promise
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 
 import datetime
 import decimal
@@ -73,7 +76,7 @@ class JSONDict(object):
             self.di.update(di)
 
     def dictify(self, di={}):
-        return simplejson.dumps(di, cls=GdjetJSONEncoder,)
+        return json.dumps(di, cls=GdjetJSONEncoder,)
 
     def out(self):
         if not self.repr:
