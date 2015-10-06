@@ -32,6 +32,6 @@ urlpatterns = patterns('site.views',
             ), name='nodes'),
         url(r'^$', views.NodesListView.as_view(
                                model=models.Node,
-                               node_url='/',
+                               node_url=getattr(settings, 'SITENODE_ROOT', '/'),
             ), name='node-root'), # root.
        )

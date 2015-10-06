@@ -29,9 +29,11 @@ class PathSlugFormField(SlugFormField):
     default_validators = [validate_path_slug]
 
 class PathSlugField(SlugField):
+    default_validators = [validate_path_slug]
     def formfield(self, **kwargs):
-        defaults = {'form_class': PathSlugFormField}
+        defaults = {}
         defaults.update(kwargs)
+        defaults['form_class'] = PathSlugFormField
         return super(SlugField, self).formfield(**defaults)
 
 

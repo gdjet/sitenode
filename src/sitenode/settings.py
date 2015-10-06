@@ -32,4 +32,4 @@ NODE_LIST_TEMPLATE = getattr(settings, 'SITENODE_LIST_TEMPLATE',
 NODE_DIV_TEMPLATE = getattr(settings, 'SITENODE_DIV_TEMPLATE',
                             'site/node_div.html')
 
-
+SITENODE_ROOT = getattr(settings, 'SITENODE_ROOT', '/') # default node for root node.

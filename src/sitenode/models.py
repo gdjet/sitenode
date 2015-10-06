@@ -39,7 +39,7 @@ NODE_SOURCE_TYPES = NODE_SOURCE_TYPES or \
 
 class Node(models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
-    slug = fields.PathSlugField(max_length=250, blank=True, unique=True)
+    slug = fields.PathSlugField(max_length=250, blank=True, unique=True, validators=[fields.validate_path_slug])
     parent = models.ForeignKey('self', blank=True, null=True,
                                related_name='children',
             help_text='Allows a node to have subnodes. subnodes cannot have\
