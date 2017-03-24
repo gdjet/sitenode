@@ -33,3 +33,18 @@ NODE_DIV_TEMPLATE = getattr(settings, 'SITENODE_DIV_TEMPLATE',
                             'site/node_div.html')
 
 SITENODE_ROOT = getattr(settings, 'SITENODE_ROOT', '/') # default node for root node.
+
+# determine our baselistview.
+BaseListView = getattr(settings, 'SITENODE_BASE_VIEW_CLASS', None)
+if BaseListView is None:
+    try:
+        from el_pagination.views import AjaxListView
+        BaseListView = AjaxListView
+    except ImportError:
+        try:
+            from endless_pagination.views import AjaxListView
+            BaseListView = AjaxListView
+        except ImportError:
+            from django.views.generic import ListView
+            BaseListView = ListView
+

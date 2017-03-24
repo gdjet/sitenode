@@ -24,15 +24,15 @@ from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
 from django.utils.html import escape, strip_tags, linebreaks
 from django.template.defaultfilters import slugify
-from filebrowser.fields import FileBrowseField
 from sitenode import fields
-from sitenode.jsonstore import JSONField
+#from sitenode.jsonstore import JSONField
 from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE
-
+import logging
 try:
     import markdown
 except ImportError:
-    pass
+    logging.warning("Markdown not installed.")
+    markdown = False
 
 NODE_SOURCE_TYPES = NODE_SOURCE_TYPES or \
     ((0, 'Plain Text'), (1, 'HTML'), (2, 'MarkDown'),)
@@ -53,10 +53,11 @@ class Node(models.Model):
 
     title = models.CharField(max_length=180, null=True)
     subtitle = models.CharField(max_length=250, blank=True, null=True)
-    image = FileBrowseField("Image", max_length=200, directory="images/", extensions=[".jpg", ".png", ".gif"], blank=True, null=True)
+    image = fields.FileBrowseField("Image", max_length=200, directory="images/", 
+                            extensions=[".jpg", ".png", ".gif"], blank=True, null=True)
     icon_file = models.ImageField(upload_to='icons', blank=True, null=True)
     content_type = models.ForeignKey(ContentType, editable=False, null=True,)
-    options = JSONField(blank=True, null=True)
+    options = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         if self.parent:
@@ -133,7 +134,7 @@ class NodeHtml(Node):
         if self.source_type == 0:
             return mark_safe(linebreaks(self.source, autoescape=True))
         elif self.source_type == 2:
-            try:
+            if markdown is not False:
                 md = markdown.Markdown(#extensions=['wikilinks2',],
                                    #extension_configs=
                                    #     { 'wikilinks2': [
@@ -145,8 +146,8 @@ class NodeHtml(Node):
                 # @todo: WikiLinks plugin.
                 r = md.convert(self.source,)
                 return mark_safe(r)
-            except:
-                raise NotImplementedError, "MarkDown either not installed or implemented yet."
+            else:
+                return mark_safe('<!-- markdown not installed -->')
         # @todo: dynamic binding for other types (and move this to elif==1 then)
         return mark_safe(self.source)
 

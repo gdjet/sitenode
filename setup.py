@@ -2,14 +2,17 @@ from setuptools import setup, find_packages
 
 setup(
     name='sitenode',
-    version='0.99.14',
+    version='0.99.15 ',
     description='Basic Models for Web Development',
     author='g4b',
     author_email='gab(at)g4b.org',
     url='',
     download_url='',
-    install_requires=['django-tinymce', 'django-endless-pagination',
-                      'django-grappelli', 'django-filebrowser>=3.4.0',
+    install_requires=['django-tinymce',
+                      # removed direct dependency.
+                      # 'django-el-pagination', # or: 'django-endless-pagination'
+                      #'django-grappelli', 
+                      #'django-filebrowser>=3.4.0',
                       'markdown'],
     #requires=['django-tinymce', 'django-endless-pagination',
     #                  'django-grappelli', 'django-filebrowser>=3.4.0'],

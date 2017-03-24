@@ -160,8 +160,6 @@ class JSONField(models.TextField):
     """JSONField is a generic textfield that neatly serializes/unserializes
     JSON objects seamlessly"""
 
-    # Used so to_python() is called
-    __metaclass__ = models.SubfieldBase
     def __init__(self, *args, **kwargs):
         if 'json_encoder' in kwargs.keys():
             self.json_encoder = kwargs['json_encoder']
@@ -183,6 +181,9 @@ class JSONField(models.TextField):
             pass
 
         return value
+    
+    def from_db_value(self, value, expression, connection, context):
+        return self.to_python(value)
 
     def get_prep_value(self, value):
         """Convert our JSON object to a string before we save"""
@@ -198,14 +199,10 @@ class JSONField(models.TextField):
         value = self._get_val_from_obj(obj)
         return self.get_db_prep_value(value)
 
-#try:
-#    from south.modelsinspector import add_introspection_rules
-#    add_introspection_rules([
-#    (
-#        [JSONField], # Class(es) these apply to
-#        [], # Positional arguments (not used)
-#        {}, # Keyword arguments.
-#    ),
-#    ], ["^jsonstore\.JSONField"])
-#except ImportError:
-#    pass
+
+# Used so to_python() is called in older djangos.
+if getattr(models, 'SubfieldBase'):
+    JSONField.__metaclass__ = models.SubfieldBase
+
+
+

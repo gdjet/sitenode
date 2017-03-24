@@ -1,7 +1,8 @@
 # very basic list of web dev utilities for mid size projects
 Django
 django-tinymce
-django-endless-pagination
+#django-endless-pagination
+django-el-pagination
 django-grappelli
 django-filebrowser>=3.4.0
 django-extensions

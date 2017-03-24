@@ -18,12 +18,13 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-from endless_pagination.views import AjaxListView
 from django.shortcuts import get_object_or_404
 from sitenode.models import Node, NodeAlias
 from sitenode.settings import NODE_LIST_TEMPLATE
+from sitenode.settings import BaseListView
 
-class NodesListView(AjaxListView):
+
+class NodesListView(BaseListView):
     CHILDREN_SORT = '-date_created'
     template_name = NODE_LIST_TEMPLATE or 'site/node_list.html'
     node_url = ''

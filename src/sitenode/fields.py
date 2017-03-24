@@ -22,6 +22,7 @@ from django.core.validators import RegexValidator
 import re
 from django.db.models.fields import SlugField
 from django.forms import SlugField as SlugFormField
+import logging
 slug_re = re.compile(r'^[-\w/]+$')
 validate_path_slug = RegexValidator(slug_re, u"Enter a valid 'slug' consisting of letters, numbers, underscores, slashes, or hyphens.", 'invalid')
 
@@ -36,4 +37,17 @@ class PathSlugField(SlugField):
         defaults['form_class'] = PathSlugFormField
         return super(SlugField, self).formfield(**defaults)
 
-
+try:
+    # django grappelli filebrowser
+    from filebrowser.fields import FileBrowseField
+except ImportError:
+    logging.debug("Grappelli Filebrowser seems not installed, falling back to CharField.")
+    # define a dummy filebrowsefield which accepts the same options.
+    class FileBrowseField(CharField):
+        description = "FileBrowseField"
+        def __init__(self, *args, **kwargs):
+            self.site = kwargs.pop('filebrowser_site', None)
+            self.directory = kwargs.pop('directory', '')
+            self.extensions = kwargs.pop('extensions', '')
+            self.format = kwargs.pop('format', '')
+            return super(FileBrowseField, self).__init__(*args, **kwargs)
