@@ -201,7 +201,7 @@ class JSONField(models.TextField):
 
 
 # Used so to_python() is called in older djangos.
-if getattr(models, 'SubfieldBase'):
+if getattr(models, 'SubfieldBase', False):
     JSONField.__metaclass__ = models.SubfieldBase
 
 
