@@ -26,7 +26,7 @@ from django.utils.html import escape, strip_tags, linebreaks
 from django.template.defaultfilters import slugify
 from sitenode import fields
 #from sitenode.jsonstore import JSONField
-from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE
+from sitenode.settings import NODE_SOURCE_TYPES, NODE_DIV_TEMPLATE, SITENODE_BASE_URL
 import logging
 try:
     import markdown
@@ -58,6 +58,9 @@ class Node(models.Model):
     icon_file = models.ImageField(upload_to='icons', blank=True, null=True)
     content_type = models.ForeignKey(ContentType, editable=False, null=True,)
     options = models.TextField(blank=True, null=True)
+    
+    def get_absolute_url(self):
+        return u'%s%s' % (SITENODE_BASE_URL, self.slug)
 
     def __unicode__(self):
         if self.parent:

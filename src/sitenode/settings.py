@@ -34,6 +34,8 @@ NODE_DIV_TEMPLATE = getattr(settings, 'SITENODE_DIV_TEMPLATE',
 
 SITENODE_ROOT = getattr(settings, 'SITENODE_ROOT', '/') # default node for root node.
 
+SITENODE_BASE_URL = getattr(settings, 'SITENODE_BASE_URL', '/')
+
 # determine our baselistview.
 BaseListView = getattr(settings, 'SITENODE_BASE_VIEW_CLASS', None)
 if BaseListView is None:
